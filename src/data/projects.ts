@@ -79,8 +79,8 @@ const projects: Project[] = [
     title: 'Next.js App Router Dashboard',
     tag: 'next-dash',
     description: 'A full-stack dashboard featuring data fetching, search, pagination, and user authentication with Supabase. Built following the official Next.js Learn Course.',
-    thumbnail: 'nextjs-dashboard-screenshot.webp', // Make sure this image is in public/images/works/
-    theme: 'green', // A nice color for this project
+    thumbnail: 'hero-desktop.png', // Make sure this image is in public/images/works/
+    theme: 'purple', // FIX: Changed from 'white' to 'purple'
     type: 'full', // The default layout works well for this
     sourceUrl: 'https://github.com/clementogol/nextjs-dashboard',
     liveUrl: 'https://nextjs-dashboard-omega-blond-34.vercel.app/',

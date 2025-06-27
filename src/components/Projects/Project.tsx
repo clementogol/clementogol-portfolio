@@ -14,6 +14,8 @@ const bgColors: Record<string, string> = {
   purple: 'bg-purple-600',
   cyan: 'bg-cyan-900',
   yellow: 'bg-yellow-400',
+  mint: 'bg-[#dbfce7]',
+  white: 'bg-white',
 };
 
 const txtColors: Record<string, string> = {
@@ -163,6 +165,8 @@ const Project = ({ project }: ProjectProps) => {
             src={`/images/works/${project.thumbnail}`}
             alt={project.title}
             fill
+            // FIX: Conditionally apply object-left to push image left and crop the right side
+            className={`object-cover ${project.tag === 'next-dash' ? 'object-left' : 'object-center'}`}
           />
         )}
         {/* ... (rest of your other project types remain unchanged) ... */}
