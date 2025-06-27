@@ -25,42 +25,38 @@ export default function ContactForm() {
   }
 
   const onSubmit = async (data: FormData) => {
-    setLoading(true);
-    setError(null);
-    setSuccess(false);
+  setLoading(true);
+  setError(null);
+  setSuccess(false);
 
-    try {
-      // Using fetch instead of Axios
-      const response = await fetch(
-        `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(data), // Convert form data to JSON
-        }
-      );
+  try {
+    // POST to your own backend API route, not directly to Resend
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data),
+    });
 
-      // Check if request was successful (status 200-299)
-      if (response.ok) {
-        setSuccess(true);
-      } else {
-        // Handle errors from server
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Submission failed');
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Something went wrong');
-      }
-    } finally {
-      setLoading(false);
+    if (response.ok) {
+      setSuccess(true);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Submission failed');
     }
-  };
+  } catch (err) {
+    if (err instanceof Error) {
+      setError(err.message);
+    } else {
+      setError('Something went wrong');
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full md:w-3/4 mt-2">
