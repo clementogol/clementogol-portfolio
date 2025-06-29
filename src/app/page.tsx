@@ -1,6 +1,9 @@
+// src/app/page.tsx
+
 import Home from "@/components/Home";
 import { Metadata } from "next";
 import ParticleBackground from "@/components/ParticleBackground";
+import { getSortedPostsData } from "@/lib/posts"; // <-- 1. IMPORT
 
 export const metadata: Metadata = {
   title: "Clement Ogol | Portfolio",
@@ -23,25 +26,15 @@ export const metadata: Metadata = {
   },
 };
 
-// export default function HomePage() {
-
-//   return (
-//     <>
-//     <Home />
-//     </> 
-//   );
-// }
-
-// app/page.tsx
-
 export default function HomePage() {
+  // 2. GET THE LATEST POSTS
+  const latestPosts = getSortedPostsData().slice(0, 3);
+
   return (
     <>
-      {/* Add the particle background component here */}
       <ParticleBackground />
-
-      {/* Your main content component */}
-      <Home />
+      {/* 3. PASS THE POSTS AS A PROP */}
+      <Home latestPosts={latestPosts} />
     </>
   );
 }
