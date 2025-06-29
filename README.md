@@ -1,353 +1,194 @@
 
 # Clementogol Portfolio
 
-A modern developer portfolio built with [Next.js](https://nextjs.org/) and TypeScript, featuring the App Router and full dark/light mode support.  
-Showcases your skills, projects, and contact details in a clean, minimal UI.
+A modern, responsive developer portfolio built with [Next.js](https://nextjs.org/) and TypeScript, featuring App Router, MDX-powered blogging, and seamless dark/light mode support.
+
+![Portfolio Banner](public/cover.png) <!-- Change this to your actual banner path if you have one -->
 
 ---
 
-## 🗂️ Project Structure
+## 🚀 Live Demo
+
+👉 [clementogol.com](https://clementogol.com)
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Blog with MDX](#blog-with-mdx)
+- [Comments Integration](#comments-integration)
+- [Customization Guide](#customization-guide)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## ✨ Features
+
+- ⚡️ **Next.js 15** with App Router
+- 💅 **Tailwind CSS** for rapid styling and custom themes
+- 🌗 **Dark/Light mode** toggle
+- ✍️ **MDX Blog support:** Write posts in Markdown + JSX
+- 🏷️ **Dynamic project & blog listings**
+- 🔍 **SEO optimized:** Metadata & Open Graph tags
+- 💬 **Giscus-powered comments** on blog posts
+- 📱 **Responsive design** for all devices
+- 🛠️ **TypeScript** strict typing
+- 🔗 **Social links** and contact integration
+- 🖼️ **Optimized images** via `next/image`
+- 🛡️ **Accessible & performant**
+
+---
+
+## 📸 Screenshots
+
+<!--
+Add screenshots in your /public or /screenshots directory and update these links
+-->
+| Homepage                   | Blog Post                  | Dark Mode                 |
+|----------------------------|----------------------------|---------------------------|
+| ![](public/screenshot1.png) | ![](public/screenshot2.png) | ![](public/screenshot3.png) |
+
+---
+
+## 🏁 Getting Started
+
+First, clone the repository:
+
+```bash
+git clone https://github.com/clementogol/clementogol-portfolio.git
+cd clementogol-portfolio
+```
+
+Install dependencies:
+
+```bash
+pnpm install
+# or
+npm install
+# or
+yarn
+```
+
+Run the development server:
+
+```bash
+pnpm dev
+# or
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+---
+
+## 🗂 Project Structure
 
 ```
 clementogol-portfolio/
-├── .env.local
-├── .gitignore
-├── components.json
-├── encoded.txt
-├── next.config.mjs
-├── package.json
-├── postcss.config.js
+├── blogposts/            # Blog posts in MDX
+├── public/               # Static assets
+├── src/
+│   ├── app/              # Next.js app router pages/components
+│   ├── components/       # Reusable UI components
+│   ├── styles/           # Global styles
+│   └── ...
 ├── README.md
+├── next.config.mjs
 ├── tailwind.config.ts
 ├── tsconfig.json
-├── public/
-│   ├── favicon.ico
-│   └── favicon.ico.Zone.Identifier
-└── src/
-    ├── app/
-    │   ├── api/
-    │   │   ├── chat/
-    │   │   │   └── route.ts
-    │   │   └── contact/
-    │   │       └── route.ts
-    │   ├── blog/
-    │   ├── favicon.ico
-    │   ├── globals.css
-    │   ├── layout.tsx
-    │   ├── page.tsx
-    │   └── ThemeProvider.tsx
-    ├── components/
-    │   ├── ui/
-    │   │   ├── Article.tsx
-    │   │   ├── ClientLayout.tsx
-    │   │   └── Comments.tsx
-    │   ├── chat/
-    │   ├── Contact/
-    │   ├── Header/
-    │   ├── Projects/
-    │   ├── Footer.tsx
-    │   ├── Home.tsx
-    │   ├── ParticleBackground.tsx
-    │   ├── ProjectsHeading.tsx
-    │   ├── ShadowBlock.tsx
-    │   └── Skills.tsx
-    ├── data/
-    ├── hooks/
-    ├── lib/
-    ├── tests/
-    └── utils/
+└── ...
 ```
 
 ---
 
-## 🚀 Getting Started
+## 📝 Blog with MDX
 
-1. **Install dependencies:**
+- Add your blog posts as `.mdx` files inside the `blogposts/` directory.
+- Each post supports frontmatter for metadata (title, date, excerpt, coverImage).
+- Example frontmatter:
 
-    ```bash
-    npm install
-    # or
-    yarn
-    # or
-    pnpm install
-    # or
-    bun install
-    ```
+  ```mdx
+  ---
+  title: "How I Built My Portfolio"
+  date: "2024-06-29"
+  excerpt: "A behind-the-scenes look at building a Next.js portfolio site."
+  coverImage: "/images/blog/portfolio-cover.png"
+  ---
+  ```
 
-2. **Start the development server:**
-
-    ```bash
-    npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
-    # or
-    bun dev
-    ```
-
-3. Open [http://localhost:3000](http://localhost:3000) in your browser to view your portfolio.
+- You can use React components inside your MDX for custom elements or UI.
 
 ---
 
-## ✨ Main Features
+## 💬 Comments Integration
 
-- [x] **Beautiful, responsive UI**
-- [x] Dark & light mode with `next-themes`
-- [x] Tailwind CSS for rapid custom styling
-- [x] Project, Skills, Blog, and Contact sections
-- [x] Modern App Router structure
-- [x] Easy customization & clean codebase
+This project integrates [Giscus](https://giscus.app/) for blog post comments.
 
----
+- Comments automatically appear below each blog post.
+- Theme adapts to site’s dark/light mode.
 
-## 📦 Key Files
-
-### `package.json`
-
-```json
-{
-  "name": "clementogol-portfolio",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "geist": "^1.2.1",
-    "next": "14.1.0",
-    "next-themes": "^0.2.1",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
-}
-```
+You can customize Giscus by editing the `Comments.tsx` component.
 
 ---
 
-### `src/app/layout.tsx`
+## 🛠️ Customization Guide
 
-```tsx
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import "./globals.css";
-import { ThemeProvider } from "./ThemeProvider";
+- **Branding:**  
+  Update your logo, favicon, and color palette in `public/` and Tailwind config.
 
-export const metadata: Metadata = {
-  title: "Clement Ogol's Portfolio",
-  description: "A portfolio showcasing projects and skills.",
-};
+- **Social Links:**  
+  Edit your social links and contact info in the layout or dedicated components.
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}
-```
+- **SEO:**  
+  Modify metadata and Open Graph in the relevant config/components.
+
+- **Blog:**  
+  Add new `.mdx` files in `blogposts/` to publish articles.
 
 ---
 
-### `src/app/page.tsx`
+## 🧰 Tech Stack
 
-```tsx
-import Header from "@/components/Header/page";
-import Home from "@/components/Home";
-import Projects from "@/components/Projects/page";
-import Skills from "@/components/Skills";
-import Contact from "@/components/Contact/page";
-import Footer from "@/components/Footer";
-import ParticleBackground from "@/components/ParticleBackground";
-
-export default function Page() {
-  return (
-    <main className="relative flex flex-col items-center px-4">
-      <ParticleBackground />
-      <div className="z-10 w-full max-w-5xl">
-        <Header />
-        <Home />
-        <Projects />
-        <Skills />
-        <Contact />
-        <Footer />
-      </div>
-    </main>
-  );
-}
-```
-
----
-
-### `src/app/globals.css`
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-```
-
----
-
-### `src/app/ThemeProvider.tsx`
-
-```tsx
-"use client";
-import * as React from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { type ThemeProviderProps } from "next-themes/dist/types";
-
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
-}
-```
-
----
-
-## 🧩 Component Placeholders
-
-You can fill in the UI of your main sections as you like. Example:
-
-#### `src/components/Home.tsx`
-
-```tsx
-import React from 'react';
-
-const Home = () => (
-  <section id="home" className="py-20">
-    <h1 className="text-4xl font-bold">Welcome to My Portfolio</h1>
-    <p className="mt-4">Developer | Creator | Innovator</p>
-  </section>
-);
-
-export default Home;
-```
-
-#### `src/components/Skills.tsx`
-
-```tsx
-import React from 'react';
-
-const Skills = () => (
-  <section id="skills" className="py-20">
-    <h2 className="text-3xl font-bold text-center">Skills</h2>
-    {/* Skill items go here */}
-  </section>
-);
-
-export default Skills;
-```
-
----
-
-## 🔌 API Route Example
-
-#### `src/app/api/contact/route.ts`
-
-```ts
-import { NextResponse } from 'next/server';
-
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    console.log("Contact form submission:", body);
-    // Add logic here to handle form data, e.g., send an email
-    return NextResponse.json({ message: "Message received successfully!" }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ message: "An error occurred." }, { status: 500 });
-  }
-}
-```
-
----
-
-## 🛡️ .gitignore Example
-
-```gitignore
-/node_modules
-/.pnp
-.pnp.js
-/coverage
-/.next/
-/out/
-/build
-.DS_Store
-*.pem
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.env.local
-.env.*
-.vercel
-*.tsbuildinfo
-next-env.d.ts
-```
-
----
-
-## 🚀 Deploy
-
-**Recommended commit message:**
-```bash
-git add .
-git commit -m "chore: trigger deployment"
-git push origin main
-```
-
----
-
-## 📖 Learn More
-
-- [Next.js Docs](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Next.js 15](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [MDX](https://mdxjs.com/)
+- [Framer Motion](https://www.framer.com/motion/) (for animations)
+- [Giscus](https://giscus.app/) (comments)
+- [Vercel](https://vercel.com/) (deployment)
 
 ---
 
-Made with ❤️ by [Clement Ogol](https://clementogol.com)
+## 🤝 Contributing
+
+Pull requests are welcome! If you have suggestions or improvements, open an issue or submit a PR.
+
+1. Fork this repository
+2. Create your branch (`git checkout -b feature/awesome-feature`)
+3. Commit your changes (`git commit -m 'Add awesome feature'`)
+4. Push to the branch (`git push origin feature/awesome-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is open source under the [MIT License](LICENSE).
+
+---
+
+## 📬 Contact
+
+Created by [Clement Ogol](https://clementogol.com)  
+Feel free to connect on [LinkedIn](https://linkedin.com/in/clementogol) or open an [issue](https://github.com/clementogol/clementogol-portfolio/issues).
+
+---
+
+> Made with ❤️ using Next.js, TypeScript, and coffee!
