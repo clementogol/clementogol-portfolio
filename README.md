@@ -22,7 +22,6 @@ clementogol-portfolio/
 ├── tsconfig.json
 ├── public/
 │   ├── favicon.ico
-│   └── favicon.ico.Zone.Identifier
 └── src/
     ├── app/
     │   ├── api/
