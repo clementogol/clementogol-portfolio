@@ -19,7 +19,7 @@ export default function StickyNav() {
 
   const { scrollY } = useScroll();
   const isScrolled = scrollY.get() > 0;
-  console.log(isScrolled);
+  // console.log(isScrolled);
 
   const id = generateUUID();
   return (

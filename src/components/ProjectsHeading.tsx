@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useAnimation, motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import SectionHeading from '@/components/SectionHeading';
-import ShadowBlock from '../components/ShadowBlock';
+// import ShadowBlock from '../components/ShadowBlock';
 
 const ProjectsHeading = () => {
   const variants = {

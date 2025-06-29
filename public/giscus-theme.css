@@ -1,0 +1,28 @@
+:root {
+  --gsc-main-bg: #f0fdf4; /* Light green background */
+  --gsc-body-bg: #ffffff;
+  --gsc-input-bg: #ffffff;
+  --gsc-border-color: #22c55e;  /* Green-500 for borders */
+  --gsc-link-color: #16a34a;    /* Green-600 for links */
+  --gsc-primary-text: #1f2937;  /* Dark text for readability */
+  --gsc-secondary-text: #4b5563;
+  --gsc-btn-bg: #fafafa;
+  --gsc-btn-border-color: #22c55e;  /* Green-500 for button borders */
+  --gsc-btn-text-color: #1f2937;
+}
+
+/* --- DARK MODE --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gsc-main-bg: #111827;
+    --gsc-body-bg: #1f2937;
+    --gsc-input-bg: #1f2937;
+    --gsc-border-color: #22d3ee; /* Teal/green border for dark mode (or use #22c55e again for consistency) */
+    --gsc-link-color: #4ade80;
+    --gsc-primary-text: #f9fafb;
+    --gsc-secondary-text: #9ca3af;
+    --gsc-btn-bg: #374151;
+    --gsc-btn-border-color: #22d3ee; /* Or use #4ade80 or #22c55e */
+    --gsc-btn-text-color: #f9fafb;
+  }
+}

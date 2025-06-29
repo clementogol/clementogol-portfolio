@@ -1,5 +1,7 @@
 // src/app/blog/page.tsx
 
+// 1. Import the Image component
+import Image from 'next/image';
 import Link from 'next/link';
 import { getSortedPostsData } from '@/lib/posts';
 import { formatDate } from '@/utils/formatDate';
@@ -24,8 +26,14 @@ export default function BlogPage() {
                         <Link href={`/blog/${slug}`} className="block">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                                 <div className="relative col-span-1 h-48 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105">
-                                    {/* Make sure your cover images exist in the /public folder */}
-                                    <img src={coverImage} alt={`Cover image for ${title}`} className="w-full h-full object-cover" />
+                                    {/* 2. Replace <img> with <Image /> and use the "fill" property */}
+                                    <Image
+                                        src={coverImage}
+                                        alt={`Cover image for ${title}`}
+                                        className="object-cover" // Note: w-full and h-full are no longer needed here
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Optional but recommended for performance
+                                    />
                                 </div>
                                 <div className="col-span-2 mt-4 md:mt-0">
                                     <time dateTime={date} className="text-sm text-zinc-500 dark:text-zinc-400">

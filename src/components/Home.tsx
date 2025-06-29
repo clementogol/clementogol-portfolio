@@ -217,7 +217,7 @@ const Home = ({ latestPosts }: HomeProps) => {
           </SectionHeading>
         </div>
         <div className="flex flex-col md:gap-3 justify-center text-center items-center text-zinc-900 dark:text-zinc-50 md:text-4xl font-semibold transition duration-500 ease-in-out">
-          <p> And that's a wrap! </p>
+          <p> And that&apos;s a wrap! </p>
           <p>
             <span> I look foward to </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-teal-400 to-teal-600 transition duration-500 ease-in-out">

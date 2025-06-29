@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
     // Success
     return NextResponse.json({ message: 'Message sent successfully!' }, { status: 200 });
   } catch (error) {
+    console.error('Contact API failed:', error); 
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
