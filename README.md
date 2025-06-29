@@ -7,53 +7,57 @@ A modern, responsive developer portfolio built with [Next.js](https://nextjs.org
 
 ---
 
-## 🚀 Live Demo
+## 🗂️ Project Structure
 
-👉 [clementogol.com](https://clementogol.com)
-
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Blog with MDX](#blog-with-mdx)
-- [Comments Integration](#comments-integration)
-- [Customization Guide](#customization-guide)
-- [Tech Stack](#tech-stack)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
----
-
-## ✨ Features
-
-- ⚡️ **Next.js 15** with App Router
-- 💅 **Tailwind CSS** for rapid styling and custom themes
-- 🌗 **Dark/Light mode** toggle
-- ✍️ **MDX Blog support:** Write posts in Markdown + JSX
-- 🏷️ **Dynamic project & blog listings**
-- 🔍 **SEO optimized:** Metadata & Open Graph tags
-- 💬 **Giscus-powered comments** on blog posts
-- 📱 **Responsive design** for all devices
-- 🛠️ **TypeScript** strict typing
-- 🔗 **Social links** and contact integration
-- 🖼️ **Optimized images** via `next/image`
-- 🛡️ **Accessible & performant**
-
----
-
-## 📸 Screenshots
-
-<!--
-Add screenshots in your /public or /screenshots directory and update these links
--->
-| Homepage                   | Blog Post                  | Dark Mode                 |
-|----------------------------|----------------------------|---------------------------|
-| ![](public/screenshot1.png) | ![](public/screenshot2.png) | ![](public/screenshot3.png) |
+```
+clementogol-portfolio/
+├── .env.local
+├── .gitignore
+├── components.json
+├── encoded.txt
+├── next.config.mjs
+├── package.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.json
+├── public/
+│   ├── favicon.ico
+│   └── favicon.ico.Zone.Identifier
+└── src/
+    ├── app/
+    │   ├── api/
+    │   │   ├── chat/
+    │   │   │   └── route.ts
+    │   │   └── contact/
+    │   │       └── route.ts
+    │   ├── blog/
+    │   ├── favicon.ico
+    │   ├── globals.css
+    │   ├── layout.tsx
+    │   ├── page.tsx
+    │   └── ThemeProvider.tsx
+    ├── components/
+    │   ├── ui/
+    │   │   ├── Article.tsx
+    │   │   ├── ClientLayout.tsx
+    │   │   └── Comments.tsx
+    │   ├── chat/
+    │   ├── Contact/
+    │   ├── Header/
+    │   ├── Projects/
+    │   ├── Footer.tsx
+    │   ├── Home.tsx
+    │   ├── ParticleBackground.tsx
+    │   ├── ProjectsHeading.tsx
+    │   ├── ShadowBlock.tsx
+    │   └── Skills.tsx
+    ├── data/
+    ├── hooks/
+    ├── lib/
+    ├── tests/
+    └── utils/
+```
 
 ---
 
