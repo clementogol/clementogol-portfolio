@@ -25,7 +25,7 @@ const DropdownMenu = ({ tags }: { tags: string[] }) => (
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="px-2 py-2 text-sm shadow-sm border-zinc-400 dark:border-zinc-700 hover:bg-orange-200 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-50 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+          className="px-2 py-2 text-sm shadow-sm border-zinc-400 dark:border-zinc-700 hover:bg-green-200 dark:hover:bg-green-800 text-zinc-900 dark:text-zinc-50 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
           aria-label="menu"
         >
           <AlignJustify className="h-5 w-5" />
@@ -34,13 +34,13 @@ const DropdownMenu = ({ tags }: { tags: string[] }) => (
 
       <DropdownMenuContent
         align="end"
-        className="w-56 bg-orange-50 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50"
+        className="w-56 bg-green-50 dark:bg-green-900 border-green-200 dark:border-green-800 text-zinc-900 dark:text-zinc-50"
       >
         {tags.map((tag) => (
           <DropdownMenuItem
             key={tag}
             asChild
-            className="cursor-pointer [&[data-highlighted]]:bg-orange-200 dark:[&[data-highlighted]]:bg-zinc-700 [&[data-highlighted]]:text-inherit dark:[&[data-highlighted]]:text-inherit"
+            className="cursor-pointer focus:bg-green-200 dark:focus:bg-green-800 focus:text-inherit dark:focus:text-inherit"
           >
             {tag !== 'Resume' && tag !== 'View Source' ? (
               <ScrollLink

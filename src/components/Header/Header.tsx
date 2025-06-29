@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation'; // Import the usePathname hook
 import ThemeToggle from './ThemeToggleButton';
 import { Github } from 'lucide-react';
 import DropdownMenu from './DropdownMenu';
+import Image from 'next/image';
 
 const Header = () => {
   // Get the current URL path. e.g., '/', '/blog', '/blog/my-post'
@@ -16,19 +17,33 @@ const Header = () => {
   const isHomePage = pathname === '/';
 
   return (
-    <header className="fixed w-full py-2 px-5 z-[100] md:p-4 backdrop-blur-md dark:text-zinc-50">
+    <header className="fixed w-full py-0.05 px-3 z-[100] md:py-0 md:px-2 backdrop-blur-md dark:text-zinc-50">
       <div className="mx-auto max-w-5xl">
         <nav className="flex items-center gap-5 text-base">
           {/* This link will scroll to the top on the homepage, or navigate to the homepage from other pages */}
-          {isHomePage ? (
-            <ScrollLink to="header" spy smooth offset={-200} className="cursor-pointer">
-              <span className="font-semibold">Clement Ogol</span>
-            </ScrollLink>
-          ) : (
-            <Link href="/" className="font-semibold">
-              Clement Ogol
-            </Link>
-          )}
+          {/* This link will scroll to the top on the homepage, or navigate to the homepage from other pages */}
+
+{isHomePage ? (
+  <ScrollLink to="header" spy smooth offset={-200} className="cursor-pointer">
+    <Image
+      src="/clemogol-logo.png"
+      alt="Clement Ogol Logo"
+      width={40}  // <-- CHANGE THIS
+      height={5} // <-- CHANGE THIS
+      priority
+    />
+  </ScrollLink>
+) : (
+  <Link href="/">
+    <Image
+      src="/clemogol-logo.png"
+      alt="Clement Ogol Logo"
+      width={40}  // <-- AND CHANGE THIS
+      height={40} // <-- AND CHANGE THIS
+      priority
+    />
+  </Link>
+)}
 
           {/* === DESKTOP NAVIGATION === */}
           <div className="items-center gap-6 hidden md:flex">

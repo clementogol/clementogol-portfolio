@@ -19,7 +19,7 @@ interface Post {
   title: string;
   date: string;
   excerpt: string;
-  coverImage: string; 
+  coverImage: string;
 }
 
 interface HomeProps {
@@ -37,7 +37,7 @@ const Home = ({ latestPosts }: HomeProps) => {
 
   const contactControls = useAnimation();
   const [contactRef, contactInView] = useInView({ threshold: 0.5, triggerOnce: true });
-  
+
   const blogControls = useAnimation();
   const [blogRef, blogInView] = useInView({ threshold: 0.2, triggerOnce: true });
 
@@ -52,7 +52,7 @@ const Home = ({ latestPosts }: HomeProps) => {
       blogControls.start('enter');
     }
   }, [blogControls, blogInView]);
-  
+
   const cardVariants = {
     hidden: { opacity: 0, y: 80 },
     enter: { opacity: 1, y: 0 },
@@ -115,11 +115,17 @@ const Home = ({ latestPosts }: HomeProps) => {
         transition={{ duration: 0.7, ease: 'easeInOut' }}
       >
         <div className="relative mb-3 text-center">
-          {/* Changed the heading to be more specific */}
           <SectionHeading overlay className="text-5xl md:text-8xl">Blog</SectionHeading>
         </div>
-        <p className="mt-2 mb-16 text-zinc-600 dark:text-zinc-400 text-center max-w-2xl mx-auto">
-          Here’s the latest from my blog—where I share what’s on my mind from cool tech finds to the real stories behind the code.
+        <p className="mt-4 mb-16 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300 text-center max-w-2xl mx-auto">
+          Here’s the latest from my blog—where I share what’s on my mind from{' '}
+          <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-cyan-500">
+            cool tech finds
+          </span>{' '}
+          to the{' '}
+          <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-cyan-500">
+            real stories behind the code.
+          </span>
         </p>
 
         {/* --- Render the single latest post if it exists --- */}
@@ -139,6 +145,15 @@ const Home = ({ latestPosts }: HomeProps) => {
                 fill
                 className="object-cover"
               />
+              
+              {/* --- START: New Decorative Symbol --- */}
+              <div className="absolute top-5 left-5 z-20 text-teal-300/70" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 2L2 2L2 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              {/* --- END: New Decorative Symbol --- */}
+              
               <div className="row-span-1 col-span-6 md:col-span-1 z-40 px-6 flex flex-col justify-center my-8 md:my-10 text-zinc-50 font-mplus">
                 <div>
                   <time dateTime={latestPost.date} className="text-xs font-bold uppercase tracking-wider text-teal-300">
@@ -217,6 +232,7 @@ const Home = ({ latestPosts }: HomeProps) => {
           </SectionHeading>
         </div>
         <div className="flex flex-col md:gap-3 justify-center text-center items-center text-zinc-900 dark:text-zinc-50 md:text-4xl font-semibold transition duration-500 ease-in-out">
+          {/* FIX: Replaced ' with ' to escape the character */}
           <p> And that&apos;s a wrap! </p>
           <p>
             <span> I look foward to </span>
