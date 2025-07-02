@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/app/ThemeProvider";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header/Header";
 import ClientLayout from "@/components/ClientLayout"; // import your animation wrapper
+import { Analytics } from '@vercel/analytics/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
             <Footer />
           </main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
