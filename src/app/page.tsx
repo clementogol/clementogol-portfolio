@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: "Clement Ogol | Portfolio",
     images: [
       {
-        url: "https://pbs.twimg.com/profile_images/1545149127054475269/Y5LEA7cQ_400x400.jpg",
+        url: "https://ibb.co/VphCsmKZ",
         width: 800,
         height: 600,
         alt: "Clement Ogol | Portfolio",
