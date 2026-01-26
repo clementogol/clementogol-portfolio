@@ -92,7 +92,7 @@ const Header = () => {
 
             {/* Resume and Source links remain the same */}
             <Link
-              href="https://drive.google.com/file/d/1Y3WOTzptmODPiyXEaoKqiMryFxt_07PO/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1ZX83HsfkVpqHFq67DmPNOw7wPrbwmXcw/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline underline-offset-4"
