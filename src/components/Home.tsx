@@ -81,17 +81,17 @@ const Home = ({ latestPosts }: HomeProps) => {
             </span>
             <br /> my name is Clement Ogol.
           </h2>
-          <p> AI Trainer | Data Analyst | Developer </p>
+          <p> Certified Virtual Assistant | AI Trainer/Data Annotator </p>
         </div>
       </div>
       <section className="mt-6">
         <SectionHeading>About me</SectionHeading>
         <p className="mb-6 dark:text-zinc-100 text-zinc-900 transition duration-500 ease-in-out">
-          I am a full-stack developer from Nairobi, Kenya, passionate about building data-driven digital solutions. With a background in Information Technology and hands-on experience in AI training, data annotation, and web development, I enjoy transforming complex problems into simple, user-focused solutions.
+          I am a tech-driven Virtual Assistant with a background in IT and AI Operations. I help professionals optimize their businesses by blending traditional administrative support with modern web development and automation strategies. I bring a technical edge to every task, from inbox management to website maintenance, to ensure your operations are constantly upgraded. My mission is to handle the complexities of your daily workflow so you can maximize productivity and focus entirely on your big goals.
         </p>
-        <p className="dark:text-zinc-100 text-zinc-900 transition duration-500 ease-in-out">
+        {/* <p className="dark:text-zinc-100 text-zinc-900 transition duration-500 ease-in-out">
           From leading AI video annotation projects to driving social media growth for brands, I thrive at the intersection of technology and impact. I leverage my skills in Python, React, and modern analytics to deliver high-quality results—on time and with best practices in mind. If you’re looking for a versatile technologist who’s ready to add value to your team, let’s connect.
-        </p>
+        </p> */}
       </section>
       <section className="mt-6" id="works">
         <SectionHeading>Skills</SectionHeading>

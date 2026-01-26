@@ -1,4 +1,32 @@
 const skills = [
+  // --- NEW VA SECTION (AT THE TOP) ---
+  {
+    category: "Virtual Assistance & Operations",
+    description: "Streamlining business workflows, managing administrative chaos, and optimizing daily operations for remote teams.",
+    technologies: [
+      "Inbox Management", 
+      "Calendar Management",
+      "SOP Creation", 
+      "Travel Planning", 
+      "CRM Management", 
+      "Project Management", 
+      "Research & Data Entry"
+    ],
+  },
+  {
+    category: "Office Tools & Platforms",
+    description: "Proficient in industry-standard tools to ensure seamless communication and document management.",
+    technologies: [
+      "Google Workspace",
+      "Microsoft 365",
+      "Notion",
+      "Slack",
+      "Zoom",
+      "Calendly",
+      "LastPass"
+    ],
+  },
+  // --- EXISTING TECH SKILLS ---
   {
     category: "AI & Data Annotation",
     description: "Expert in labeling, annotating, and analyzing data for computer vision, NLP, and machine learning models; experienced with video, audio, image, and text datasets.",

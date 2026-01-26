@@ -28,6 +28,13 @@ import {
   Expand,
   X,
   CheckCircle,
+  // NEW ICONS ADDED FOR VA SKILLS:
+  Mail,
+  Calendar,
+  Users,
+  Video,
+  ClipboardCheck,
+  Lock
 } from "lucide-react"
 import skills from "@/data/skills"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
@@ -49,6 +56,24 @@ interface IconsType {
 }
 
 const icons: IconsType = {
+  // --- NEW VA & OFFICE TOOL MAPPINGS ---
+  "Inbox Management": Mail,
+  "Calendar Management": Calendar,
+  "SOP Creation": FileText,
+  "Travel Planning": Globe,
+  "CRM Management": Users,
+  "Project Management": ClipboardCheck,
+  "Research & Data Entry": Search,
+  
+  "Google Workspace": LayoutGrid,
+  "Microsoft 365": LayoutGrid,
+  "Notion": FileText,
+  "Slack": MessageSquare,
+  "Zoom": Video,
+  "Calendly": Calendar,
+  "LastPass": Lock,
+
+  // --- EXISTING MAPPINGS ---
   // Frontend/Backend/AI/Data Science
   React: Code2,
   "Next.js": Layers,
@@ -155,7 +180,7 @@ const icons: IconsType = {
   "Learning Data Analytics Part 2: Extending and Applying Core Knowledge": Brain,
   "Introduction to Career Skills in Data Analytics": Brain,
 
-  // AI & Data Annotation (add these!)
+  // AI & Data Annotation
   "SuperAnnotate": CheckCircle,        
   "Label Studio": LayoutGrid,          
   "Scene Analysis": Search,            
