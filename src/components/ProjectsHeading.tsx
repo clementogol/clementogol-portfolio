@@ -33,7 +33,7 @@ const ProjectsHeading = () => {
       initial="hidden"
       transition={{ duration: 0.7, ease: 'easeInOut', type: 'tween' }}
     >
-      <SectionHeading overlay className="text-5xl md:text-8xl text-center">Projects</SectionHeading>
+      <SectionHeading overlay className="text-5xl md:text-8xl text-center">Services</SectionHeading>
       {/* <ShadowBlock /> */}
     </motion.div>
   );
