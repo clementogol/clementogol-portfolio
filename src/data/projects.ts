@@ -38,7 +38,7 @@ const projects: Project[] = [
     theme: 'purple',
     type: 'full', 
     sourceUrl: '', // No source code for a service
-    liveUrl: 'https://calendly.com/your-link', // Link to your booking page
+    liveUrl: 'https://calendly.com/clementogol/30min', // Link to your booking page
   },
   {
     title: 'Technical Virtual Assistant',
@@ -48,7 +48,7 @@ const projects: Project[] = [
     theme: 'blue', 
     type: 'overlay', // Using the overlay style for a "Tech" feel
     sourceUrl: '',
-    liveUrl: 'https://calendly.com/your-link',
+    liveUrl: 'https://calendly.com/clementogol/30min',
   },
   {
     title: 'Social Media & Digital Marketing',
@@ -59,7 +59,7 @@ const projects: Project[] = [
     theme: 'orange',
     type: 'overlay',
     sourceUrl: '',
-    liveUrl: 'https://calendly.com/your-link',
+    liveUrl: 'https://calendly.com/clementogol/30min',
   },
 ];
 
