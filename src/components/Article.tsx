@@ -1,9 +1,10 @@
-'use client'; // <--- 1. Add this. Motion components run on the client.
+'use client';
 
 import React from 'react';
-// FIX 2: Change 'motion/react' to 'framer-motion'
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
 import clsx from 'clsx';
+// 1. IMPORT THIS
+import { usePathname } from 'next/navigation';
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: 20 },
@@ -17,8 +18,14 @@ interface ArticleProps {
 }
 
 const Article = ({ children, className }: ArticleProps) => {
+  // 2. GET CURRENT URL
+  const pathname = usePathname();
+
   return (
     <motion.article
+      // 3. THE KEY FIX: Forces animation to run every time URL changes
+      key={pathname} 
+      
       initial="hidden"
       animate="enter"
       exit="exit"

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Link as ScrollLink } from 'react-scroll';
 import { AlignJustify } from 'lucide-react';
@@ -19,64 +19,91 @@ const scrollTarget = {
   Projects: 'works',
 };
 
-const DropdownMenu = ({ tags }: { tags: string[] }) => (
-  <div className="relative inline-block text-left md:hidden">
-    <ShadcnDropdownMenu>
-      <DropdownMenuTrigger asChild>
+const DropdownMenu = ({ tags }: { tags: string[] }) => {
+  // 1. STATE: Track if the component has mounted in the browser
+  const [isMounted, setIsMounted] = useState(false);
+
+  // 2. EFFECT: Set state to true immediately after the first render
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // 3. GUARD: If we are on the Server (or first render), show a static button.
+  // This prevents the ID mismatch error because we don't render the complex Dropdown logic yet.
+  if (!isMounted) {
+    return (
+      <div className="relative inline-block text-left md:hidden">
         <Button
           variant="outline"
-          className="px-2 py-2 text-sm shadow-sm border-zinc-400 dark:border-zinc-700 hover:bg-green-200 dark:hover:bg-green-800 text-zinc-900 dark:text-zinc-50 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+          className="px-2 py-2 text-sm shadow-sm border-zinc-400 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50"
           aria-label="menu"
         >
           <AlignJustify className="h-5 w-5" />
         </Button>
-      </DropdownMenuTrigger>
+      </div>
+    );
+  }
 
-      <DropdownMenuContent
-        align="end"
-        className="w-56 bg-green-50 dark:bg-green-900 border-green-200 dark:border-green-800 text-zinc-900 dark:text-zinc-50"
-      >
-        {tags.map((tag) => (
-          <DropdownMenuItem
-            key={tag}
-            asChild
-            className="cursor-pointer focus:bg-green-200 dark:focus:bg-green-800 focus:text-inherit dark:focus:text-inherit"
+  // 4. REAL RENDER: Once mounted, render the interactive menu safely
+  return (
+    <div className="relative inline-block text-left md:hidden">
+      <ShadcnDropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            className="px-2 py-2 text-sm shadow-sm border-zinc-400 dark:border-zinc-700 hover:bg-green-200 dark:hover:bg-green-800 text-zinc-900 dark:text-zinc-50 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+            aria-label="menu"
           >
-            {tag !== 'Resume' && tag !== 'View Source' ? (
-              <ScrollLink
-                to={scrollTarget[tag as keyof typeof scrollTarget] || 'top'}
-                spy
-                smooth
-                offset={-70}
-                duration={500}
-                className="w-full text-left"
-              >
-                {tag}
-              </ScrollLink>
-            ) : tag === 'Resume' ? (
-              <Link
-                href="https://docs.google.com/document/d/1Fg2qQOS2DUQ9nt2wWuEzuwG4JHrVEiY85zPv2G2S0nA/edit?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-left"
-              >
-                {tag}
-              </Link>
-            ) : (
-              <Link
-                href="https://github.com/clementogol/clementogol-portfolio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-left"
-              >
-                {tag}
-              </Link>
-            )}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </ShadcnDropdownMenu>
-  </div>
-);
+            <AlignJustify className="h-5 w-5" />
+          </Button>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent
+          align="end"
+          className="w-56 bg-green-50 dark:bg-green-900 border-green-200 dark:border-green-800 text-zinc-900 dark:text-zinc-50"
+        >
+          {tags.map((tag) => (
+            <DropdownMenuItem
+              key={tag}
+              asChild
+              className="cursor-pointer focus:bg-green-200 dark:focus:bg-green-800 focus:text-inherit dark:focus:text-inherit"
+            >
+              {tag !== 'Resume' && tag !== 'View Source' ? (
+                <ScrollLink
+                  to={scrollTarget[tag as keyof typeof scrollTarget] || 'top'}
+                  spy
+                  smooth
+                  offset={-70}
+                  duration={500}
+                  className="w-full text-left"
+                >
+                  {tag}
+                </ScrollLink>
+              ) : tag === 'Resume' ? (
+                <Link
+                  href="https://docs.google.com/document/d/1Fg2qQOS2DUQ9nt2wWuEzuwG4JHrVEiY85zPv2G2S0nA/edit?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-left"
+                >
+                  {tag}
+                </Link>
+              ) : (
+                <Link
+                  href="https://github.com/clementogol/clementogol-portfolio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-left"
+                >
+                  {tag}
+                </Link>
+              )}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </ShadcnDropdownMenu>
+    </div>
+  );
+};
 
 export default DropdownMenu;
