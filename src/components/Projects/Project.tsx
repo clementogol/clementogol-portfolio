@@ -49,23 +49,21 @@ const Project = ({ project }: ProjectProps) => {
     }
   }, [controls, inView]);
 
-  // New, creative animation for the Weather App
-  const weatherAppVariants: Variants = {
+  // Animation for the Tech Service (formerly Weather App)
+  const floatingVariants: Variants = {
     hidden: { opacity: 0, y: 40, scale: 0.9, rotate: '8deg' },
     visible: {
       opacity: 1,
-      y: [-5, 5], // This creates the floating effect
+      y: [-5, 5],
       scale: 1,
-      rotate: '-4deg', // Settle at a nice angle
+      rotate: '-4deg',
       transition: {
-        // Transition for the floating (y-axis) animation
         y: {
           duration: 3,
           repeat: Infinity,
           repeatType: 'reverse',
           ease: 'easeInOut',
         },
-        // Springy transition for the entry animation (everything else)
         rotate: { type: 'spring', stiffness: 100, damping: 15 },
         scale: { type: 'spring', stiffness: 100, damping: 15 },
         opacity: { duration: 0.5 },
@@ -87,54 +85,50 @@ const Project = ({ project }: ProjectProps) => {
         src="https://framerusercontent.com/images/0u1KOKQqa7zWlOeQzGyjGsYTIEU.png"
         alt={project.theme}
         fill
+        className="object-cover opacity-50"
       />
-      {/* TEXT LEFT, Consistent across ALL projects */}
+      {/* TEXT LEFT */}
       <div className="row-span-1 col-span-6 md:col-span-1 z-40 px-6 flex flex-col justify-center my-8 md:my-10 text-zinc-50 font-mplus">
         <div>
-          <h2 className="font-semibold text-xl md:text-xl mb-2">{project.title}</h2>
+          <h2 className="font-semibold text-2xl md:text-3xl mb-2">{project.title}</h2>
+          
+          {/* Service Tagline (Replaces the "View Live" link) */}
           <div className="flex items-center gap-3 mb-4">
-            {project.sourceUrl && (
-              <Link href={project.liveUrl} target="_blank" className="text-right">
-                <span className="text-xs font-bold text-white hover:underline underline-offset-4 decoration-zinc-300 transition ease-in duration-100">
-                  View Live Project <span className="font-bold ml-1">↗</span>
-                </span>
-              </Link>
-            )}
-            {!project.sourceUrl && (
-              <span className="text-xs font-bold p-2 bg-clip-text text-transparent bg-gradient-to-r from-orange-50 to-teal-500">
-                Client Project
+             <span className="text-xs font-bold p-2 bg-white/20 backdrop-blur-sm rounded-md text-white border border-white/30 uppercase tracking-wider">
+                Available Now
               </span>
-            )}
           </div>
-          <p className="text-base md:text-lg mb-4">{project.description}</p>
-          <Link href={project.sourceUrl ? project.sourceUrl : project.liveUrl} target="_blank">
-            <button className={`relative self-start bg-zinc-50 ${txtColors[project.theme]} font-semibold p-3 text-xs rounded-lg text-center shadow-md hover:shadow-zinc-200/20 hover:shadow-lg transition ease-in duration-100`} type="button">
-              {project.sourceUrl ? 'View Source Code' : 'View Live Project'}
+
+          <p className="text-base md:text-lg mb-6 leading-relaxed opacity-90">{project.description}</p>
+          
+          {/* Call to Action Button */}
+          <Link href={project.liveUrl} target="_blank">
+            <button className={`relative self-start bg-zinc-50 ${txtColors[project.theme]} font-bold px-6 py-3 text-sm rounded-lg text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200`} type="button">
+              Book Consultation 📅
             </button>
           </Link>
         </div>
       </div>
+
       {/* IMAGE RIGHT */}
       <div className="relative row-span-1 col-start-2 col-span-5 md:col-span-1 z-20 rounded-tl-md overflow-hidden mt-3 md:mt-14 flex items-center justify-center">
         
-        {/* NEW UNIFIED LOGIC FOR OVERLAY PROJECTS */}
-
-        {/* WEATHER APP: uses the new single-image floating animation */}
-        {project.type === 'overlay' && project.tag === 'wa' && (
+        {/* TECH VA SERVICE: Floating Phone Animation */}
+        {project.type === 'overlay' && project.tag === 'tech-va' && (
           <motion.img
             src={`/images/works/${project.thumbnail}`}
             alt={`${project.title} main`}
             width={210}
-            height={420} // Adjusted height for better aspect ratio
+            height={420}
             className="relative rounded-xl shadow-2xl border-4 border-white"
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            variants={weatherAppVariants}
+            variants={floatingVariants}
           />
         )}
 
-        {/* OTHER OVERLAY PROJECTS: two images stacked, for bouldering etc */}
-        {project.type === 'overlay' && project.tag !== 'wa' && (
+        {/* SOCIAL MEDIA SERVICE: Two stacked images */}
+        {project.type === 'overlay' && project.tag !== 'tech-va' && (
           <div className="relative w-full h-72 md:h-80 flex items-center justify-center">
             <Image
               src={`/images/works/${project.thumbnail}`}
@@ -146,30 +140,30 @@ const Project = ({ project }: ProjectProps) => {
                 boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
               }}
             />
-            <Image
-              src={`/images/works/${project.thumbnail2}`}
-              alt={`${project.title} alt`}
-              width={260}
-              height={180}
-              className="absolute left-24 top-0 shadow-xl rounded-md z-20 border border-white"
-              style={{
-                boxShadow: '0 16px 48px rgba(0,0,0,0.22)',
-              }}
-            />
+            {project.thumbnail2 && (
+              <Image
+                src={`/images/works/${project.thumbnail2}`}
+                alt={`${project.title} alt`}
+                width={260}
+                height={180}
+                className="absolute left-24 top-0 shadow-xl rounded-md z-20 border border-white"
+                style={{
+                  boxShadow: '0 16px 48px rgba(0,0,0,0.22)',
+                }}
+              />
+            )}
           </div>
         )}
 
-        {/* Other layouts remain the same */}
+        {/* ADMIN SERVICE: Full layout */}
         {project.type === 'full' && (
           <Image
             src={`/images/works/${project.thumbnail}`}
             alt={project.title}
             fill
-            // FIX: Conditionally apply object-left to push image left and crop the right side
-            className={`object-cover ${project.tag === 'next-dash' ? 'object-left' : 'object-center'}`}
+            className={`object-cover ${project.tag === 'admin-ops' ? 'object-left' : 'object-center'}`}
           />
         )}
-        {/* ... (rest of your other project types remain unchanged) ... */}
       </div>
     </motion.div>
   );
