@@ -27,8 +27,8 @@ interface HomeProps {
 }
 
 const Home = ({ latestPosts }: HomeProps) => {
-  // Get ONLY the single latest post from the array
-  const latestPost = latestPosts[0];
+  // Safe access to first post
+  const latestPost = latestPosts && latestPosts.length > 0 ? latestPosts[0] : null;
 
   const variants = {
     hidden: { opacity: 0, y: 20 },
@@ -61,19 +61,19 @@ const Home = ({ latestPosts }: HomeProps) => {
   return (
     <Article>
       <StickyNav />
-      {/* ... your existing header and about me sections ... */}
+      {/* Header Section */}
       <div className="flex flex-col items-center md:flex-row my-8 md:my-14 gap-15" id="header">
         <div className="mt-4 md:mt-0">
-          <div className="border-teal-900/40 border-2 rounded-full w-24 h-24 inline-block overflow-hidden">
+          <div className="border-teal-900/40 border-2 rounded-full w-24 h-24 inline-block overflow-hidden relative">
             <Image
               src="/me.jpeg"
-              alt="Clement Ogol's professional image"
-              width={100}
-              height={100}
+              alt="Clement Ogol"
+              fill
+              className="object-cover"
             />
           </div>
         </div>
-        <div className="self-start text-zinc-900 dark:text-zinc-100 transition duration-500 ease-in-out">
+        <div className="self-start text-zinc-900 dark:text-zinc-100 transition duration-500 ease-in-out md:ml-6">
           <h2 className="text-3xl font-semibold font-mplus">
             Hello{' '}
             <span className="inline-block animate-wave" style={{ transformOrigin: '70% 70%' }}>
@@ -81,32 +81,30 @@ const Home = ({ latestPosts }: HomeProps) => {
             </span>
             <br /> my name is Clement Ogol.
           </h2>
-          <p> Certified Virtual Assistant | AI Trainer/Data Annotator </p>
+          <p className="mt-2"> Certified Virtual Assistant | AI Trainer/Data Annotator </p>
         </div>
       </div>
+
       <section className="mt-6">
         <SectionHeading>About me</SectionHeading>
         <p className="mb-6 dark:text-zinc-100 text-zinc-900 transition duration-500 ease-in-out">
-          I am a tech-driven Virtual Assistant with a background in IT and AI Operations. I help professionals optimize their businesses by blending traditional administrative support with modern web development and automation strategies. I bring a technical edge to every task, from inbox management to website maintenance, to ensure your operations are constantly upgraded. My mission is to handle the complexities of your daily workflow so you can maximize productivity and focus entirely on your big goals.
+          I am a tech-driven Virtual Assistant with a background in IT and AI Operations. I help professionals optimize their businesses by blending traditional administrative support with modern web development and automation strategies.
         </p>
-        {/* <p className="dark:text-zinc-100 text-zinc-900 transition duration-500 ease-in-out">
-          From leading AI video annotation projects to driving social media growth for brands, I thrive at the intersection of technology and impact. I leverage my skills in Python, React, and modern analytics to deliver high-quality results—on time and with best practices in mind. If you’re looking for a versatile technologist who’s ready to add value to your team, let’s connect.
-        </p> */}
       </section>
+
       <section className="mt-6" id="works">
         <SectionHeading>Skills</SectionHeading>
         <Skills />
       </section>
+
       <section className="mt-8">
         <ProjectsHeading />
         <Projects />
       </section>
 
-      {/* ====================================================================== */}
-      {/* LATEST ARTICLE SECTION (SINGLE POST ONLY)                            */}
-      {/* ====================================================================== */}
+      {/* BLOG SECTION */}
       <motion.section
-        id = "blog"
+        id="blog"
         className="my-12 md:my-24"
         ref={blogRef}
         initial="hidden"
@@ -128,8 +126,7 @@ const Home = ({ latestPosts }: HomeProps) => {
           </span>
         </p>
 
-        {/* --- Render the single latest post if it exists --- */}
-        {latestPost && (
+        {latestPost ? (
             <motion.div
               key={latestPost.slug}
               className="relative grid grid-cols-6 grid-rows-2 md:grid-rows-1 md:grid-cols-2 md:h-project rounded-md overflow-hidden shadow-2xl"
@@ -139,20 +136,21 @@ const Home = ({ latestPosts }: HomeProps) => {
               transition={{ duration: 0.7, ease: 'easeInOut', type: 'tween' }}
             >
               <div className="absolute inset-0 bg-cyan-900 opacity-75 z-10" />
-              <Image
-                src="https://framerusercontent.com/images/0u1KOKQqa7zWlOeQzGyjGsYTIEU.png"
-                alt="Background texture"
-                fill
-                className="object-cover"
-              />
-              
-              {/* --- START: New Decorative Symbol --- */}
+              <div className="absolute inset-0 z-0">
+                 <Image
+                    src="https://framerusercontent.com/images/0u1KOKQqa7zWlOeQzGyjGsYTIEU.png"
+                    alt="Background texture"
+                    fill
+                    className="object-cover"
+                 />
+              </div>
+
+              {/* Decorative Symbol */}
               <div className="absolute top-5 left-5 z-20 text-teal-300/70" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22 2L2 2L2 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              {/* --- END: New Decorative Symbol --- */}
               
               <div className="row-span-1 col-span-6 md:col-span-1 z-40 px-6 flex flex-col justify-center my-8 md:my-10 text-zinc-50 font-mplus">
                 <div>
@@ -183,10 +181,11 @@ const Home = ({ latestPosts }: HomeProps) => {
                 </div>
               </div>
             </motion.div>
+        ) : (
+          <div className="text-center text-zinc-500">No blog posts found.</div>
         )}
         
-        {/* --- Conditionally render the "Explore" button if there's more than one post --- */}
-        {latestPosts.length > 1 && (
+        {latestPosts && latestPosts.length > 1 && (
             <div className="mt-20 flex justify-center">
                 <Link href="/blog" className="group">
                     <button
@@ -196,27 +195,13 @@ const Home = ({ latestPosts }: HomeProps) => {
                         <span className="text-teal-300">
                         Explore All Articles
                         </span>
-                        <svg
-                            className="ml-3 h-5 w-5 text-teal-400 transition-transform duration-300 group-hover:translate-x-1.5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                        </svg>
                     </button>
                 </Link>
             </div>
         )}
       </motion.section>
 
-      {/* --- Your existing Contact section --- */}
+      {/* Contact Section */}
       <motion.section
         id="contact"
         className="my-12 md:my-24"
@@ -232,10 +217,9 @@ const Home = ({ latestPosts }: HomeProps) => {
           </SectionHeading>
         </div>
         <div className="flex flex-col md:gap-3 justify-center text-center items-center text-zinc-900 dark:text-zinc-50 md:text-4xl font-semibold transition duration-500 ease-in-out">
-          {/* FIX: Replaced ' with ' to escape the character */}
           <p> And that&apos;s a wrap! </p>
           <p>
-            <span> I look foward to </span>
+            <span> I look forward to </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-teal-400 to-teal-600 transition duration-500 ease-in-out">
               chatting with you soon.
             </span>

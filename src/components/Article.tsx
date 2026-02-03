@@ -1,5 +1,8 @@
+'use client'; // <--- 1. Add this. Motion components run on the client.
+
 import React from 'react';
-import { motion } from 'motion/react';
+// FIX 2: Change 'motion/react' to 'framer-motion'
+import { motion } from 'framer-motion'; 
 import clsx from 'clsx';
 
 const variants = {

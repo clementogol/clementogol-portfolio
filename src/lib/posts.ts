@@ -1,91 +1,89 @@
-// src/lib/posts.ts
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter'; // We still need this for getSortedPostsData
-import { compileMDX } from 'next-mdx-remote/rsc';
-import readingTime from 'reading-time';
-import Image from 'next/image';
+import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
-// --- Step 1: Import ALL your custom components used in MDX files ---
-import { InfoBox } from '@/components/ui/InfoBox';
-import { YouTubeEmbed } from '@/components/ui/YouTubeEmbed';
-import { Counter } from '@/components/ui/Counter';
-import { Warning } from '@/components/ui/Warning'; 
-
-
-
-// Get the directory for our blog posts
+// FIX 1: Point to 'blogposts' instead of 'posts'
 const postsDirectory = path.join(process.cwd(), 'blogposts');
 
-// --- Step 2: Create the "dictionary" of components for the MDX renderer ---
-const mdxComponents = {
-  Image,
-  InfoBox,
-   Warning,
-  YouTubeEmbed,
-  Counter,
-  // You can even add custom styles to default tags here if you want
-  // h2: (props: any) => <h2 className="text-2xl font-bold" {...props} />,
-};
-
-// This function is fine as-is, no changes needed here.
 export function getSortedPostsData() {
-    // Get file names under /blogposts
-    const fileNames = fs.readdirSync(postsDirectory);
-    const allPostsData = fileNames.map((fileName) => {
-        // Remove ".mdx" from file name to get id (the slug)
-        const slug = fileName.replace(/\.mdx$/, '');
+  // Check if directory exists
+  if (!fs.existsSync(postsDirectory)) {
+    console.warn(`Directory not found: ${postsDirectory}`);
+    return [];
+  }
 
-        // Read markdown file as string
-        const fullPath = path.join(postsDirectory, fileName);
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileNames = fs.readdirSync(postsDirectory);
+  
+  // FIX 2: Filter for .mdx files and map them
+  const allPostsData = fileNames
+    .filter((fileName) => fileName.endsWith('.mdx')) // Only look for .mdx files
+    .map((fileName) => {
+      // FIX 3: Remove ".mdx" from file name to get slug
+      const slug = fileName.replace(/\.mdx$/, '');
 
-        // Use gray-matter to parse the post metadata section
-        const matterResult = matter(fileContents);
+      // Read markdown file as string
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-        // Combine the data with the slug
-        return {
-            slug,
-            ...(matterResult.data as { title: string; date: string; excerpt: string; coverImage: string }),
-        };
+      // Use gray-matter to parse the post metadata section
+      const matterResult = matter(fileContents);
+
+      return {
+        slug,
+        ...(matterResult.data as { date: string; title: string; excerpt: string; coverImage: string }),
+      };
     });
 
-    // Sort posts by date
-    return allPostsData.sort((a, b) => {
-        if (a.date < b.date) {
-            return 1;
-        } else {
-            return -1;
-        }
-    });
+  // Sort posts by date
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 }
 
-// --- Step 3: Modify getPostData to use the components ---
 export async function getPostData(slug: string) {
-    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+  // FIX 4: Append ".mdx" when looking for the specific file
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+  
+  // Verify file exists
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Post not found: ${slug}`);
+  }
 
-    // Use compileMDX to process the file, parsing frontmatter and injecting components
-    const { content, frontmatter } = await compileMDX<{
-        title: string;
-        date: string;
-        excerpt: string;
-        coverImage: string;
-    }>({
-        source: fileContents,
-        components: mdxComponents, // THIS IS THE FIX: Pass the components here!
-        options: {
-            parseFrontmatter: true, // Let compileMDX handle frontmatter parsing
-        },
-    });
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-    // Calculate reading time from the original content string
-    const stats = readingTime(fileContents);
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents);
 
-    return {
-        slug,
-        frontmatter, // `frontmatter` now comes directly from compileMDX
-        content,     // `content` is now a fully-baked React Component
-        readingTime: stats.text,
-    };
+  // Use remark to convert markdown into HTML string
+  // Note: Since you are using MDX, if you have React components inside your text,
+  // remark-html will ignore them. For standard text/images, this works fine.
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+  const contentHtml = processedContent.toString();
+
+  // Calculate reading time
+  const wordCount = matterResult.content.split(/\s+/g).length;
+  const readingTime = Math.ceil(wordCount / 200) + ' min read';
+
+  // Get Next/Prev posts for navigation
+  const allPosts = getSortedPostsData();
+  const currentIndex = allPosts.findIndex(post => post.slug === slug);
+  const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+
+  return {
+    slug,
+    contentHtml,
+    readingTime,
+    prevPost,
+    nextPost,
+    frontmatter: matterResult.data as { title: string; date: string; coverImage: string; excerpt: string },
+  };
 }

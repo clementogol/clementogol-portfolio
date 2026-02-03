@@ -12,6 +12,8 @@ const config: Config = {
     // The extend object should now be empty or back to how it was before.
     extend: {}, 
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
 export default config;
