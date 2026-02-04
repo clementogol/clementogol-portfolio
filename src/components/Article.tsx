@@ -3,13 +3,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
-// 1. IMPORT THIS
-import { usePathname } from 'next/navigation';
 
+// 1. We removed variants.exit because it requires AnimatePresence 
+// in a parent component to work, which isn't present here.
 const variants = {
   hidden: { opacity: 0, x: 0, y: 20 },
   enter: { opacity: 1, x: 0, y: 0 },
-  exit: { opacity: 0, x: -0, y: 20 },
 };
 
 interface ArticleProps {
@@ -18,17 +17,15 @@ interface ArticleProps {
 }
 
 const Article = ({ children, className }: ArticleProps) => {
-  // 2. GET CURRENT URL
-  const pathname = usePathname();
+  // 2. REMOVED usePathname. We rely on natural component mounting.
 
   return (
     <motion.article
-      // 3. THE KEY FIX: Forces animation to run every time URL changes
-      key={pathname} 
-      
+      // 3. REMOVED key={pathname}. This was causing the "blank page" lock.
       initial="hidden"
+      whileInView="enter" // Changed to whileInView to ensure it triggers even if load is delayed, or stick to 'animate'
       animate="enter"
-      exit="exit"
+      viewport={{ once: true }} // Ensures it runs once
       variants={variants}
       transition={{ 
         duration: 0.4, 

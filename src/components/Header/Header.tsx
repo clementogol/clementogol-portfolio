@@ -50,11 +50,11 @@ const Header = () => {
             {/* Works Link */}
             {isHomePage ? (
               <ScrollLink to="works" spy smooth className="cursor-pointer hover:underline underline-offset-4">
-                Works
+                Services
               </ScrollLink>
             ) : (
               <Link href="/#works" className="hover:underline underline-offset-4">
-                Works
+                Services
               </Link>
             )}
 

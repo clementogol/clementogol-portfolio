@@ -48,7 +48,11 @@ export default async function Post({ params }: Props) {
   const { contentHtml, frontmatter, readingTime, prevPost, nextPost } = postData;
 
   return (
-    <Article className="max-w-3xl mx-auto px-4 py-24">
+    // ADDED key={slug} below. 
+    // This forces the Article component to remount (and animate) 
+    // only when the specific post slug changes.
+    <Article className="max-w-3xl mx-auto px-4 py-24" key={slug}>
+      
       {/* Back to Blog */}
       <Link href="/blog" className="flex items-center text-sm font-medium text-zinc-500 hover:text-teal-500 transition-colors mb-10 group">
         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
@@ -76,7 +80,7 @@ export default async function Post({ params }: Props) {
         />
       </div>
 
-      {/* --- FIX: Use dangerouslySetInnerHTML to render the Markdown HTML --- */}
+      {/* --- Render the Markdown HTML --- */}
       <div 
         className="prose prose-zinc dark:prose-invert max-w-none mb-20 prose-headings:font-mplus prose-a:text-teal-500 prose-img:rounded-xl"
         dangerouslySetInnerHTML={{ __html: contentHtml }} 
