@@ -17,15 +17,21 @@ export async function generateStaticParams() {
   }));
 }
 
+// 2. Generate Metadata for SEO
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   try {
     const post = await getPostData(slug);
+    
+    // Quick Fix: We treat frontmatter as 'any' to allow both 'excerpt' and 'summary'
+    // This stops TypeScript from complaining about the missing property.
+    const data = post.frontmatter as any;
+
     return {
-      title: `${post.frontmatter.title} | Clement Ogol`,
-      description: post.frontmatter.excerpt || post.frontmatter.summary,
+      title: `${data.title} | Clement Ogol`,
+      description: data.excerpt || data.summary,
       openGraph: {
-        images: [post.frontmatter.coverImage],
+        images: [data.coverImage],
       },
     };
   } catch (e) {
